@@ -6,11 +6,9 @@ pipeline {
         stage("build") {
             steps {
                 echo "building the application..."
-                sh '''
-                                    echo "PATH = ${PATH}"
-                                    echo "M2_HOME = ${M2_HOME}"
-                                '''
-                sh 'mvn install'
+                withMaven {
+                    sh "mvn clean install"
+                }
             }
         }
     }
